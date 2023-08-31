@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
@@ -52,9 +55,9 @@ const Grid = ({ users , setUsers , setOnEdit}) => {
             const newArray = users.filter((user) => user.id !== id);
     
             setUsers(newArray);
-            // toast.success(data);
+            toast.success(data.message);
           })
-        //   .catch(({ data }) => toast.error(data));
+        .catch(({ data }) => toast.error(data.message));
     
         setOnEdit(null);
       };
@@ -75,10 +78,10 @@ const Grid = ({ users , setUsers , setOnEdit}) => {
                     <Td width="30%">{item.email}</Td>
                     <Td width="20%" onlyWeb>{item.telefone}</Td>
                     <Td alignCenter width="5%">
-                        <FaEdit onClick={() => handleEdit(item)}/>
+                        <FaEdit cursor="pointer" onClick={() => handleEdit(item)}/>
                     </Td>
                     <Td alignCenter width="5%">
-                        <FaTrash onClick={() => handleDelete(item.id)}/>
+                        <FaTrash cursor="pointer" onClick={() => handleDelete(item.id)}/>
                     </Td>
                 </Tr>
             ))}

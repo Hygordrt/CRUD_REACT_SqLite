@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Styled from "styled-components";
 
 const FormContainer = Styled.form`
@@ -74,24 +77,18 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           !e.target.pergunta_01?.value ||
           !e.target.pergunta_02?.value
         ) {
-        //   return toast.warn("Preencha todos os campos!");
+           return toast.warn("Preencha todos os campos!");
         }
         console.log("onEdit:", onEdit);
         if (onEdit) {
-          await axios.put("http://localhost:3001/api/updateUser/" + onEdit.id, formData);
-            // .then(({ data }) => toast.success(data))
-            // .catch(({ data }) => toast.error(data));
+            debugger;
+          await axios.put("http://localhost:3001/api/updateUser/" + onEdit.id, formData)
+            .then(({ data }) => toast.success(data.message))
+            .catch(({ data }) => toast.error(data.message));
         } else {
-            await axios.post("http://localhost:3001/api/addUser", formData);
-        //   {
-        //       nome: user.nome.value,
-        //       email: user.email.value,
-        //       telefone: user.telefone.value,
-        //       pergunta_01: user.pergunta_01.value,
-        //       pergunta_02: user.pergunta_02.value,
-        //     })
-            // .then(({ data }) => toast.success(data))
-            // .catch(({ data }) => toast.error(data));
+            await axios.post("http://localhost:3001/api/addUser", formData)
+            .then(({ data }) => toast.success(data.message))
+            .catch(({ data }) => toast.error(data.message));
         }
     
         user.nome.value = "";
