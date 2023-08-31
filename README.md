@@ -1,6 +1,6 @@
 # Projeto CRUD-REACT
 
-Este projeto é uma aplicação CRUD completa que combina as tecnologias Node.js para o back-end e React.js para o front-end. A aplicação oferece 5 campos de entrada de dados essenciais. Para armazenar e gerenciar essas informações, utilizamos o banco de dados SQLite.
+Este projeto é uma aplicação CRUD completa que combina as tecnologias Node.js para o back-end e React.js para o front-end. A aplicação oferece 5 campos de entrada de dados essenciais. Para armazenar e gerenciar essas informações, utilizo o banco de dados SQLite.
 
 ## Instruções de Execução
 
