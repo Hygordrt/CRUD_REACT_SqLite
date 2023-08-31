@@ -12,15 +12,15 @@ const db = new sqlite3.Database("./db/database.sqlite");
 app.get('/api/data', (req, res) => {
   const query = 'SELECT * FROM form_desafio'; 
 
-  db.all(query, (err, rows) => {
+  db.all(query, (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).json({ error: 'Erro ao buscar dados.' });
     } else {
-      if (rows.length === 0) {
+      if (data.length === 0) {
         res.status(404).json({ message: 'Nenhum dado encontrado.' });
       } else {
-        res.json(rows);
+        res.json(data);
       }
     }
   });
@@ -29,3 +29,6 @@ app.get('/api/data', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor API rodando na porta ${port}`);
 });
+
+// node server.js para rodar o servidor
+// http://localhost:3001/api/data
