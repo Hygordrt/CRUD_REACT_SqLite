@@ -1,21 +1,31 @@
-No diretório do projeto, você pode executar:
+# Projeto CRUD-REACT
 
-#Back
+Este projeto é uma aplicação CRUD completa que combina as tecnologias Node.js para o back-end e React.js para o front-end. A aplicação oferece 5 campos de entrada de dados essenciais. Para armazenar e gerenciar essas informações, utilizamos o banco de dados SQLite.
+
+## Instruções de Execução
+
+Para executar este projeto, siga os passos abaixo:
+
+### Back-end
+
+1. Navegue até o diretório 'back' do projeto no terminal.
+2. Execute o seguinte comando para iniciar o servidor:
 
 node server.js
 
-Executa a api.
+3. Isso iniciará a API.
 
-Abra http://localhost:3000](http://localhost:3001/api/data , para visualizár dados inseridos no banco.
+4. Abra [http://localhost:3001/api/data](http://localhost:3001/api/data) no seu navegador para visualizar os dados inseridos no banco.
 
-Pacote 'express' para roteamento e 'sqlite3' para banco de dados.
+Pacote 'express' é utilizado para o roteamento e 'sqlite3' para o banco de dados.
 
-#Front
+### Front-end
+
+1. Navegue até o diretório 'front' do projeto no terminal.
+2. Execute o seguinte comando para iniciar o aplicativo no modo de desenvolvimento:
 
 npm start
 
-Executa o aplicativo no modo de desenvolvimento.
+3. Abra [http://localhost:3000](http://localhost:3000) no seu navegador para visualizar o aplicativo.
 
-Abra http://localhost:3000 para visualizá-lo em seu navegador.
-
-Projeto desenvolvido em React, pacote styled-components e font global "poppins".
+O projeto front-end foi desenvolvido em React, utilizando o pacote 'styled-components' para estilização e a fonte global "poppins".
