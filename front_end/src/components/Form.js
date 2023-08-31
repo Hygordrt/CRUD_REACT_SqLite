@@ -63,15 +63,9 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
             telefone: e.target.telefone.value,
             pergunta_01: e.target.pergunta_01.value,
             pergunta_02: e.target.pergunta_02.value,
-          }
+        };
 
         const user = ref.current;
-        console.log(e.target.nome?.value);
-        console.log(e.target.email?.value);
-        console.log(e.target.telefone?.value);
-        console.log(e.target.pergunta_01?.value);
-        console.log(e.target.pergunta_02?.value);
-        console.log(ref.current);
 
         if (
           !e.target.nome?.value ||
@@ -82,13 +76,13 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         ) {
         //   return toast.warn("Preencha todos os campos!");
         }
-    
+        console.log("onEdit:", onEdit);
         if (onEdit) {
-          await axios.put("http://localhost:3001/api/updateUser/:" + onEdit.id, formData)
+          await axios.put("http://localhost:3001/api/updateUser/" + onEdit.id, formData);
             // .then(({ data }) => toast.success(data))
             // .catch(({ data }) => toast.error(data));
         } else {
-          await axios.post("http://localhost:3001/api/addUser", formData)
+            await axios.post("http://localhost:3001/api/addUser", formData);
         //   {
         //       nome: user.nome.value,
         //       email: user.email.value,
@@ -100,11 +94,11 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
             // .catch(({ data }) => toast.error(data));
         }
     
-        // user.nome.value = "";
-        // user.email.value = "";
-        // user.telefone.value = "";
-        // user.pergunta_01.value = "";
-        // user.pergunta_02.value = "";
+        user.nome.value = "";
+        user.email.value = "";
+        user.telefone.value = "";
+        user.pergunta_01.value = "";
+        user.pergunta_02.value = "";
 
         setOnEdit(null);
         getUsers();
