@@ -29,8 +29,10 @@ app.get('/api/data', (req, res) => {
 });
 
 app.post('/api/addUser', (req, res) => {
+  
+  console.log(req);
   const { nome, email, telefone, pergunta_01, pergunta_02 } = req.body;
-
+ 
   const sql = 'INSERT INTO form_desafio (nome, email, telefone, pergunta_01, pergunta_02) VALUES (?, ?, ?, ?, ?)';
 
   db.run(sql, [nome, email, telefone, pergunta_01, pergunta_02], function(err) {

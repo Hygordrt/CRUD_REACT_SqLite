@@ -24,7 +24,7 @@ const Title = Styled.h2``;
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [onEdit, setEdit] = useState(null);
+  const [onEdit, setOnEdit] = useState(null);
 
   const getUsers = async () => {
     try {
@@ -43,9 +43,9 @@ function App() {
   return (
     <>
       <Container>
-        <Title>Preencha o form abaixo.</Title>
-        <Form/>
-        <Grid users={users}/>
+        <Title>Preencha o formulário abaixo.</Title>
+        <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
+        <Grid users={users} setUsers={setUsers} setOnEdit={setOnEdit}/>
       </Container>
       {/* <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} /> */}
       <GlobalStyle />

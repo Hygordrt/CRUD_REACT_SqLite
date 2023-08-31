@@ -1,4 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from "react";
+import axios from "axios";
+
 import Styled from "styled-components";
 
 const FormContainer = Styled.form`
@@ -37,38 +39,102 @@ const Button = Styled.button`
     height: 42px
 `;
 
-const Form = ({ onEdit }) => {
-  const ref = useRef();
+const Form = ({ getUsers, onEdit, setOnEdit }) => {
+    const ref = useRef();
   
-    return (
-    <FormContainer ref={ref}>
-        <InputArea>
-            <Label>Nome</Label>
-            <Input name="nome" />
-        </InputArea>
-        <InputArea>
-            <Label>E-mail</Label>
-            <Input name="email" />
-        </InputArea>
-        <InputArea>
-            <Label>Telefone</Label>
-            <Input name="telefone" />
-        </InputArea>
-        <InputArea>
-            <Label>pergunta_01</Label>
-            <Input name="pergunta_01" />
-        </InputArea>
-        <InputArea>
-            <Label>pergunta_02</Label>
-            <Input name="pergunta_02" />
-        </InputArea>
-        <InputArea>
-            <Label>pergunta_03</Label>
-            <Input name="pergunta_03" />
-        </InputArea>
+    useEffect(() => {
+      if (onEdit) {
+        const user = ref.current;
+  
+        user.nome.value = onEdit.nome;
+        user.email.value = onEdit.email;
+        user.telefone.value = onEdit.telefone;
+        user.pergunta_01.value = onEdit.pergunta_01;
+        user.pergunta_02.value = onEdit.pergunta_02;
+      }
+    }, [onEdit]);
 
-        <Button>Salvar</Button>
-    </FormContainer>
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        const formData = {
+            nome: e.target.nome.value,
+            email: e.target.email.value,
+            telefone: e.target.telefone.value,
+            pergunta_01: e.target.pergunta_01.value,
+            pergunta_02: e.target.pergunta_02.value,
+          }
+
+        const user = ref.current;
+        console.log(e.target.nome?.value);
+        console.log(e.target.email?.value);
+        console.log(e.target.telefone?.value);
+        console.log(e.target.pergunta_01?.value);
+        console.log(e.target.pergunta_02?.value);
+        console.log(ref.current);
+
+        if (
+          !e.target.nome?.value ||
+          !e.target.email?.value ||
+          !e.target.telefone?.value ||
+          !e.target.pergunta_01?.value ||
+          !e.target.pergunta_02?.value
+        ) {
+        //   return toast.warn("Preencha todos os campos!");
+        }
+    
+        if (onEdit) {
+          await axios.put("http://localhost:3001/api/updateUser/:" + onEdit.id, formData)
+            // .then(({ data }) => toast.success(data))
+            // .catch(({ data }) => toast.error(data));
+        } else {
+          await axios.post("http://localhost:3001/api/addUser", formData)
+        //   {
+        //       nome: user.nome.value,
+        //       email: user.email.value,
+        //       telefone: user.telefone.value,
+        //       pergunta_01: user.pergunta_01.value,
+        //       pergunta_02: user.pergunta_02.value,
+        //     })
+            // .then(({ data }) => toast.success(data))
+            // .catch(({ data }) => toast.error(data));
+        }
+    
+        // user.nome.value = "";
+        // user.email.value = "";
+        // user.telefone.value = "";
+        // user.pergunta_01.value = "";
+        // user.pergunta_02.value = "";
+
+        setOnEdit(null);
+        getUsers();
+      };
+    
+      return (
+        <FormContainer ref={ref} onSubmit={handleSubmit}>
+            <InputArea>
+                <Label>Nome</Label>
+                <Input name="nome" />
+            </InputArea>
+            <InputArea>
+                <Label>E-mail</Label>
+                <Input name="email" />
+            </InputArea>
+            <InputArea>
+                <Label>Telefone</Label>
+                <Input name="telefone" />
+            </InputArea>
+            <InputArea>
+                <Label>Empresa</Label>
+                <Input name="pergunta_01" />
+            </InputArea>
+            <InputArea>
+                <Label>Cargo</Label>
+                <Input name="pergunta_02" />
+            </InputArea>
+
+            <Button type="submit">Salvar</Button>
+        </FormContainer>
   );
 };
 
