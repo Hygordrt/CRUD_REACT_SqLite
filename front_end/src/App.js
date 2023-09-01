@@ -1,5 +1,5 @@
 import GlobalStyle from "./styles/global";
-import Styled from "styled-components";
+import { Container , Title } from './components-style//Components-Styles.js';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,18 +10,6 @@ import axios from "axios";
 
 import Form from "./components/Form";
 import Grid from "./components/Grid";
-
-const Container = Styled.div`
-  width:100%;
-  max-width: 800px;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-`;
-
-const Title = Styled.h2``;
 
 function App() {
   const [users, setUsers] = useState([]);

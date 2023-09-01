@@ -1,49 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState  } from "react";
 import axios from "axios";
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import InputMask from 'react-input-mask';
 
-import Styled from "styled-components";
-
-const FormContainer = Styled.form`
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    flex-wrap: wrap;
-    background-color: #fff;
-    padding: 20px;
-    box-shadown: 0px 0px 5px #ccc;
-    border-radius: 5px;
-`;
-
-const InputArea = Styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const Input = Styled.input`
-    width: 120px;
-    padding: 0 10px;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    height: 40px;
-    `;
-
-const Label = Styled.label``;
-
-const Button = Styled.button`
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    background-color: #2c73d2;
-    color: white;
-    height: 42px
-`;
+import { FormContainer , Input, InputArea, Button , Label } from '../components-style/Components-Styles.js';
+import '../styles/style.css';
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
     const ref = useRef();
+    const [telefone, setTelefone] = useState('');
   
     useEffect(() => {
       if (onEdit) {
@@ -93,40 +60,53 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     
         user.nome.value = "";
         user.email.value = "";
-        user.telefone.value = "";
+        // user.telefone.value = "";
+        setTelefone('');
         user.pergunta_01.value = "";
         user.pergunta_02.value = "";
 
         setOnEdit(null);
         getUsers();
-      };
-    
-      return (
-        <FormContainer ref={ref} onSubmit={handleSubmit}>
-            <InputArea>
-                <Label>Nome</Label>
-                <Input name="nome" />
-            </InputArea>
-            <InputArea>
-                <Label>E-mail</Label>
-                <Input name="email" />
-            </InputArea>
-            <InputArea>
-                <Label>Telefone</Label>
-                <Input name="telefone" />
-            </InputArea>
-            <InputArea>
-                <Label>Empresa</Label>
-                <Input name="pergunta_01" />
-            </InputArea>
-            <InputArea>
-                <Label>Cargo</Label>
-                <Input name="pergunta_02" />
-            </InputArea>
+    };
 
-            <Button type="submit">Salvar</Button>
+    // handleTelefoneChange = (e) => {
+    //     this.setState({ telefone: e.target.value });
+    // }
+    
+    return (
+        <FormContainer ref={ref} onSubmit={handleSubmit}>
+
+                <InputArea>
+                    <Label>Nome</Label>
+                    <Input name="nome" />
+                </InputArea>
+                <InputArea>
+                    <Label>E-mail</Label>
+                    <Input name="email" />
+                </InputArea>
+                <InputArea>
+                    <Label>Telefone</Label>
+                    <InputMask
+                        mask="(99) 99999-9999"
+                        value={telefone}
+                        onChange={(e) => setTelefone(e.target.value)}
+                    >
+                    {(inputProps) => <input {...inputProps} name="telefone" className="custom-input" />}
+                    </InputMask>
+                </InputArea>
+                <InputArea>
+                    <Label>Empresa</Label>
+                    <Input name="pergunta_01" />
+                </InputArea>
+                <InputArea>
+                    <Label>Cargo</Label>
+                    <Input name="pergunta_02" />
+                </InputArea>
+                
+                <Button type="submit">Salvar</Button>
+
         </FormContainer>
-  );
+    );
 };
 
 export default Form
